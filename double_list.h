@@ -21,5 +21,6 @@ Nodo* buscar_valor(DoubleList* lista, int data);
 void moverse_adelante(DoubleList* lista);
 void moverse_atras(DoubleList* lista);
 void liberar_memoria(DoubleList* lista);
+int validar_lista(const DoubleList* lista);
 
 #endif 

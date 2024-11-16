@@ -4,7 +4,7 @@
 typedef struct Nodo {
     int data;
     struct Nodo* prev;
-    struct Nodo* nect;
+    struct Nodo* next;
 } Nodo; 
 
 typedef struct DoubleList {

@@ -197,6 +197,70 @@ void insertar_en_index(DoubleList* lista, int index, int data) {
  * Libera la memoria de todos los nodos de la lista y de la lista misma.
  * @param lista La lista doblemente enlazada.
  */
+
+/**
+ * Busca un nodo con el valor especificado en la lista.
+ * @param list La lista doblemente enlazada.
+ * @param data El valor que se desea buscar.
+ * @return Un puntero al nodo encontrado, o NULL si no se encuentra.
+ */
+Nodo* buscar_valor(DoubleList* lista, int data) {
+    if (!validar_lista(lista)) return NULL;
+
+    Nodo* current = lista->head; // Declaramos current para que sea el primer nodo de la lista
+
+    // Recorremos la lista buscando el valor
+    while (current) {
+        if (current->data == data) {
+            printf("Valor %d encontrado en la lista.\n", data);
+            return current; // Se recorre la lista hasta que current tenga el mismo valor de data
+        }
+        current = current->next; // Le asignamos next a current para movernos por la lista hasta que sea NULL 
+    }
+
+    // Si no se encuentra, imprimir mensaje y retornar NULL
+    printf("Valor %d no encontrado en la lista.\n", data);
+    return NULL;
+}
+
+/**
+ * Elimina un nodo con el valor especificado de la lista.
+ * @param lista La lista doblemente enlazada.
+ * @param data El valor del nodo que se desea eliminar.
+ */
+void borrar_valor(DoubleList* lista, int data) {
+    if (!validar_lista(lista)) return;
+
+    // Buscamos el nodo con el valor especificado usando la función buscar_valor
+    Nodo* current = buscar_valor(lista, data);
+
+    // Si el valor del nodo que buscamos no se encuentra
+    if (!current) {
+        return; // search_by_value ya imprime el mensaje correspondiente
+    }
+
+    // Ajustamos para que el nodo prev ahora apunte al nodo next y así no se pierda el enlace
+    if (current->prev) {
+        current->prev->next = current->next;
+    } else {
+        // Eliminamos el head
+        lista->head = current->next;
+    }
+
+    if (current->next) {
+        current->next->prev = current->prev;
+    } else {
+        // Eliminamos el tail
+        lista->tail = current->prev;
+    }
+
+    // Liberar el nodo eliminado
+    free(current);
+
+    printf("Nodo con valor %d eliminado de la lista.\n", data);
+}
+
+
 void liberar_memoria(DoubleList* lista) {
     if (!lista) return;
 

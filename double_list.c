@@ -236,7 +236,7 @@ void borrar_valor(DoubleList* lista, int data) {
 
     // Si el valor del nodo que buscamos no se encuentra
     if (!current) {
-        return; // search_by_value ya imprime el mensaje correspondiente
+        return; // buscar_valor ya imprime el mensaje
     }
 
     // Ajustamos para que el nodo prev ahora apunte al nodo next y así no se pierda el enlace
